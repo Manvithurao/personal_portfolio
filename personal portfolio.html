@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #060816;
+      --surface: rgba(12, 18, 35, 0.9);
+      --surface-2: rgba(255,255,255,0.06);
+      --text: #f6f7fb;
+      --muted: #9aa5c7;
+      --accent: #7c8cff;
+      --accent-2: #28d7c7;
+      --accent-3: #ff62b5;
+      --border: rgba(255,255,255,0.12);
+      --radius: 22px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,140,255,.18), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(40,215,199,.16), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      inset: auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.22;
+      pointer-events: none;
+      animation: drift 12s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+    body::before { top: -80px; left: -80px; background: var(--accent); }
+    body::after { right: -70px; bottom: -70px; background: var(--accent-3); animation-delay: -4s; }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to { transform: translate(30px, -25px) scale(1.08); }
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      backdrop-filter: blur(12px);
+      background: rgba(6,8,22,0.7);
+      margin-bottom: 16px;
+    }
+
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+      background-size: 200% auto;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 0.95rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+      padding: 56px 0 34px;
+    }
+
+    .hero-copy h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-copy h1 span {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulseText 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 620px;
+      margin-bottom: 22px;
+      animation: fadeUp 0.95s ease both;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      animation: fadeUp 1.1s ease both;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(124,140,255,0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: white;
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-card h3 {
+      font-size: 1.06rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.1rem;
+      color: white;
+    }
+
+    .section {
+      padding: 48px 0;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.55rem;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 22px;
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(124,140,255,0.45);
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 14px;
+    }
+
+    .skill {
+      background: rgba(255,255,255,0.04);
+      padding: 14px 12px;
+      text-align: center;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.32);
+    }
+
+    .project-image {
+      height: 140px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, rgba(124,140,255,0.22), rgba(40,215,199,0.18));
+      border: 1px solid rgba(255,255,255,0.08);
+      animation: wiggle 2.2s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-2deg); }
+    }
+
+    .project h4 {
+      font-size: 1.04rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .project a {
+      color: var(--accent-2);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124,140,255,0.45);
+    }
+
+    .cert-card h4 {
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .cert-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .cert-card a {
+      color: var(--accent-2);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, rgba(124,140,255,.14), rgba(40,215,199,.12));
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 26px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .contact-box a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 0 40px;
+      font-size: 0.92rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .stats { grid-template-columns: 1fr; }
+      .hero { padding-top: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="logo">MANVITH A U</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>Hello, I'm <span>Manvith A U</span><br />MCA Student & Aspiring Developer.</h1>
+        <p>I am passionate about software development, problem solving, and building practical solutions using modern technologies. I enjoy creating interactive and impactful applications.</p>
+        <div class="btn-row">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Contact Me</a>
+          <a href="Manvith_A_U_Resume.pdf" class="btn btn-secondary" target="_blank" download>Download Resume</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Quick Profile</h3>
+        <p>Focused on coding, innovation, and real-world project experience in web and software development.</p>
+        <div class="stats">
+          <div class="stat"><strong>MCA</strong><span>Education</span></div>
+          <div class="stat"><strong>2+</strong><span>Projects</span></div>
+          <div class="stat"><strong>4+</strong><span>Languages</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-text">I am an MCA student with a strong interest in technology, coding, and building meaningful software solutions. My goal is to grow as a developer by combining logic, creativity, and practical innovation.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Education</h3>
+          <p>Pursuing MCA and developing strong foundations in programming, problem solving, and software development.</p>
+        </div>
+        <div class="card">
+          <h3>Contact Details</h3>
+          <p><strong>Email:</strong> manvithmanvith26@gmail.com<br><strong>GitHub:</strong> manvithurao<br><strong>LinkedIn:</strong> linkedin.com/in/manvith-a-u</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2 class="section-title">Languages & Skills</h2>
+      <div class="skill-grid">
+        <div class="skill">C</div>
+        <div class="skill">Python</div>
+        <div class="skill">Java</div>
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <div class="project">
+          <div class="project-image" style="background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 41, 59, 0.9)); color: #fff; font-size: 1rem; text-align: center; padding: 16px; line-height: 1.5;">Student Portal<br><span style="font-size:0.9rem; color:#9aa5c7;">Attendance • Marks • Timetable</span></div>
+          <h4>Student Academic Portal</h4>
+          <p>Students can mark attendance through a QR code scanner, and the system stores student marks, timetable details, and college events. Admins can manage student data efficiently.</p>
+        </div>
+        <div class="project">
+          <div class="project-image" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(59, 130, 246, 0.45)); color: #fff; font-size: 1rem; text-align: center; padding: 16px; line-height: 1.5;">Traffic System<br><span style="font-size:0.9rem; color:#dbeafe;">Prediction • Monitoring • Control</span></div>
+          <h4>Traffic Prediction and Control</h4>
+          <p>An intelligent project aimed at analyzing traffic patterns and improving traffic management through prediction and control strategies.</p>
+        </div>
+        <div class="project">
+          <div class="project-image" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(16, 185, 129, 0.35)); color: #fff; font-size: 1rem; text-align: center; padding: 16px; line-height: 1.5;">Smart Solution<br><span style="font-size:0.9rem; color:#d1fae5;">AI • Automation • Innovation</span></div>
+          <h4>Innovative Tech Solutions</h4>
+          <p>Exploring practical applications of programming and data-driven ideas to solve real-world problems effectively.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates" class="section">
+      <h2 class="section-title">Certificates</h2>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <h4>AWS Certification</h4>
+          <p>Amazon Web Services cloud certification.</p>
+          <a href="AWS Certification .pdf" target="_blank" download>View / Download</a>
+        </div>
+        <div class="cert-card">
+          <h4>SQL Certificate</h4>
+          <p>SQL fundamentals and database query certification.</p>
+          <a href="sql certificate .pdf" target="_blank" download>View / Download</a>
+        </div>
+        <div class="cert-card">
+          <h4>Hackathon Participation</h4>
+          <p>Participation certificate from the hackathon event.</p>
+          <a href="Hackathon participation Certificate (1).pdf" target="_blank" download>View / Download</a>
+        </div>
+        <div class="cert-card">
+          <h4>Resume</h4>
+          <p>Professional resume for career and opportunities.</p>
+          <a href="Manvith_A_U_Resume.pdf" target="_blank" download>View / Download</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="contact-box">
+        <h2 class="section-title">Let’s work together</h2>
+        <p class="section-text" style="margin: 0 auto 16px;">I am open to opportunities, collaborations, and projects that involve coding, innovation, and learning.</p>
+        <p style="margin-bottom: 10px;"><a href="Manvith_A_U_Resume.pdf" target="_blank" download>Download Resume</a></p>
+        <p style="margin-bottom: 8px;"><a href="mailto:manvithmanvith26@gmail.com">manvithmanvith26@gmail.com</a></p>
+        <p style="margin-bottom: 8px;"><a href="https://github.com/manvithurao" target="_blank">GitHub: manvithurao</a></p>
+        <p><a href="https://linkedin.com/in/manvith-a-u" target="_blank">LinkedIn: Manvith A U</a></p>
+      </div>
+    </section>
+  </div>
+
+  <footer>© 2026 Manvith A U. Built with HTML & CSS.</footer>
+</body>
+</html>
